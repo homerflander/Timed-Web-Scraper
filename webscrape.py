@@ -14,7 +14,6 @@ url=url.strip()
 r=requests.get(url)
 soup=BeautifulSoup(r.content,"html.parser")
 links=soup.find_all(typeofclass,{"class":nameofclass})
-links2=links
 counter=1
 list1=""
 list2=""
@@ -35,7 +34,9 @@ for link in links:
 counter=1
 
 while(exitloop==0):
-    links = links2
+    r = requests.get(url)
+    soup = BeautifulSoup(r.content, "html.parser")
+    links = soup.find_all(typeofclass, {"class": nameofclass})
     for link in links:
         list2=list2+(str(counter)+". "+link.text+"\n")
         counter=counter+1
@@ -46,4 +47,4 @@ while(exitloop==0):
     if(list2!=list1):
         print("A change has occurred. List One:\n"+list1+"\n Does not match with List Two:\n"+list2)
         exitloop=1
-    list2 = ""
+    list2=""
